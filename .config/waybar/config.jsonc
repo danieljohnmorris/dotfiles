@@ -7,7 +7,13 @@
   "radius": 0,
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["clock"],
-  "modules-right": ["network", "bluetooth", "tray", "custom/ollama-session", "custom/ollama-weekly"],
+  "modules-right": ["custom/logout", "network", "bluetooth", "tray", "custom/ollama-session", "custom/ollama-weekly"],
+
+  "custom/logout": {
+    "format": "󰍃",
+    "tooltip": "Save session and return to login picker",
+    "on-click": "~/.scripts/logout-to-picker.sh"
+  },
 
   // Center: cava + media
   "group/media": {
