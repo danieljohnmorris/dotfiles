@@ -7,7 +7,14 @@
   "radius": 0,
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["clock"],
-  "modules-right": ["network", "bluetooth", "tray", "custom/ollama-session", "custom/ollama-weekly"],
+  "modules-right": ["custom/wallpaper", "network", "bluetooth", "tray", "custom/ollama-session", "custom/ollama-weekly"],
+
+  "custom/wallpaper": {
+    "format": "󰸉",
+    "tooltip": "Left: pick wallpaper · Right: random",
+    "on-click": "~/.scripts/hypr-session-save.sh && ~/.scripts/wallpick.sh",
+    "on-click-right": "~/.scripts/hypr-session-save.sh && ~/.scripts/random-wall.sh"
+  },
 
   // Center: cava + media
   "group/media": {
