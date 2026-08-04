@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Pi (Ollama)
+Comment=Pi AI coding assistant with Ollama
+Exec=ghostty --working-directory=/home/dan/code -e /home/dan/.local/bin/pi-ollama
+Icon=utilities-terminal
+Terminal=false
+Categories=Development;Utility;
+Keywords=pi;ollama;ai;assistant;coding;kimi;

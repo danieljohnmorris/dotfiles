@@ -23,12 +23,14 @@ CONFIGS=(
     ".config/autostart"
     ".local/share/color-schemes"
     ".local/share/konsole"
+    ".local/share/applications"
 )
 
 # Single files, not directories
 FILES=(
     ".config/chromium-flags.conf"
     ".config/kwalletrc"
+    ".config/ksmserverrc"
 )
 
 SCRIPTS=".scripts"
