@@ -20,6 +20,7 @@ CONFIGS=(
     ".config/elephant"
     ".config/walker"
     ".config/DankMaterialShell"
+    ".config/autostart"
     ".local/share/color-schemes"
     ".local/share/konsole"
 )

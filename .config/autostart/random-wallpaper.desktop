@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Random Wallpaper (Plasma)
+Exec=/home/dan/.scripts/random-wall-plasma.sh
+OnlyShowIn=KDE;
+X-KDE-autostart-phase=2
+Terminal=false
