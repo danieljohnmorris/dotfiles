@@ -21,6 +21,12 @@ CONFIGS=(
     ".config/walker"
 )
 
+# Single files, not directories
+FILES=(
+    ".config/chromium-flags.conf"
+    ".config/kwalletrc"
+)
+
 SCRIPTS=".scripts"
 
 case "${1:-pull}" in
@@ -29,6 +35,10 @@ case "${1:-pull}" in
         for cfg in "${CONFIGS[@]}"; do
             mkdir -p "$HOME/$cfg"
             rsync -av "$DOTDIR/$cfg/" "$HOME/$cfg/"
+        done
+        for f in "${FILES[@]}"; do
+            mkdir -p "$(dirname "$HOME/$f")"
+            rsync -av "$DOTDIR/$f" "$HOME/$f"
         done
         mkdir -p "$HOME/.scripts"
         rsync -av "$DOTDIR/$SCRIPTS/" "$HOME/.scripts/"
@@ -40,6 +50,10 @@ case "${1:-pull}" in
         for cfg in "${CONFIGS[@]}"; do
             mkdir -p "$DOTDIR/$cfg"
             rsync -av "$HOME/$cfg/" "$DOTDIR/$cfg/"
+        done
+        for f in "${FILES[@]}"; do
+            mkdir -p "$(dirname "$DOTDIR/$f")"
+            rsync -av "$HOME/$f" "$DOTDIR/$f"
         done
         mkdir -p "$DOTDIR/$SCRIPTS"
         rsync -av "$HOME/.scripts/" "$DOTDIR/$SCRIPTS/"
