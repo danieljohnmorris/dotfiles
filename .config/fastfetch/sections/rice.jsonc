@@ -1,0 +1,15 @@
+{
+  "logo": { "type": "none" },
+  "modules": [
+    { "type": "custom", "format": "\u001b[90m┌────────Rice Stack──────────┐" },
+    { "type": "command", "key": "󰖯 Compositor", "keyColor": "yellow", "text": "echo 'Hyprland'" },
+    { "type": "command", "key": "│ ├󰃖 Shell", "keyColor": "yellow", "text": "systemctl --user is-active dms &>/dev/null && echo 'DMS (Quickshell)' || { pgrep -x waybar &>/dev/null && echo 'Waybar'; } || echo 'none'" },
+    { "type": "command", "key": "│ ├󰍩 Notifs", "keyColor": "yellow", "text": "pgrep -x swaync &>/dev/null && echo 'swaync' || { pgrep -x mako &>/dev/null && echo 'mako'; } || { systemctl --user is-active dms &>/dev/null && echo 'dms (built-in)'; } || echo 'none'" },
+    { "type": "command", "key": "│ ├󰍉 Launcher", "keyColor": "yellow", "text": "command -v walker &>/dev/null && echo 'Walker' || { command -v rofi &>/dev/null && echo 'rofi'; } || echo 'none'" },
+    { "type": "command", "key": "│ ├󰸉 Wall", "keyColor": "yellow", "text": "awww query 2>/dev/null | head -1 | sed 's|.*image: ||;s|.*/||' | cut -c1-25 || echo 'none'" },
+    { "type": "command", "key": "│ ├󰸌 Theming", "keyColor": "yellow", "text": "command -v matugen &>/dev/null && echo 'matugen' || echo 'static'" },
+    { "type": "command", "key": "│ ├󰌾 Lock", "keyColor": "yellow", "text": "command -v hyprlock &>/dev/null && echo 'hyprlock' || echo 'none'" },
+    { "type": "command", "key": "└ └ Login", "keyColor": "yellow", "text": "systemctl is-enabled sddm &>/dev/null && echo 'SDDM' || echo 'tty'" },
+    { "type": "custom", "format": "\u001b[90m└────────────────────────────┘" }
+  ]
+}

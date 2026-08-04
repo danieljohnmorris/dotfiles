@@ -1,0 +1,15 @@
+{
+  "logo": { "type": "none" },
+  "modules": [
+    { "type": "custom", "format": "\u001b[90m┌──────Age / Uptime──────────┐" },
+    {
+      "type": "command",
+      "key": "󱦟 OS Age",
+      "keyColor": "magenta",
+      "text": "birth_install=$(stat -c %W /); current=$(date +%s); days=$(( (current - birth_install) / 86400 )); echo \"$days days\""
+    },
+    { "type": "uptime", "key": "󱫐 Uptime", "keyColor": "magenta" },
+    { "type": "colors", "paddingLeft": 2, "symbol": "circle" },
+    { "type": "custom", "format": "\u001b[90m└────────────────────────────┘" }
+  ]
+}
