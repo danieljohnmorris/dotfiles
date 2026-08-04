@@ -1,0 +1,5 @@
+# Launch apps directly instead of wrapping them in `uwsm-app`/systemd-run.
+# The uwsm launch path spawns the process but its window never maps, so menu
+# launches appeared to do nothing.
+auto_detect_launch_prefix = false
+launch_prefix = ""

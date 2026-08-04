@@ -17,6 +17,8 @@ CONFIGS=(
     ".config/mako"
     ".config/swaync"
     ".config/fastfetch"
+    ".config/elephant"
+    ".config/walker"
 )
 
 SCRIPTS=".scripts"
