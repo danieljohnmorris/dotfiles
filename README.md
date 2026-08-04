@@ -37,6 +37,9 @@ files from a wallpaper.
 
 Prefer to do it by hand? `./sync.sh pull` just deploys the configs.
 
+System-level login config (session picker, passwordless SDDM) lives separately
+in [`system/`](system/) — see its README, then `sudo ./system/apply.sh`.
+
 ## Day-to-day
 
 | Command             | What it does                                            |
