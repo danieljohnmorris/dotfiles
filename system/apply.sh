@@ -22,8 +22,8 @@ install -m644 "$DIR/usr/share/wayland-sessions/hyprland-uwsm.desktop" \
     /usr/share/wayland-sessions/hyprland-uwsm.desktop
 
 echo "==> Keep the duplicate hidden across package upgrades"
-if ! grep -q 'wayland-sessions/hyprland.desktop' /etc/pacman.conf; then
-    sed -i '/^\[options\]/a NoExtract = usr/share/wayland-sessions/hyprland.desktop' /etc/pacman.conf
+if ! grep -q 'wayland-sessions/hyprland-uwsm.desktop' /etc/pacman.conf; then
+    sed -i '/^\[options\]/a NoExtract = usr/share/wayland-sessions/hyprland-uwsm.desktop' /etc/pacman.conf
 fi
 
 echo "==> Disable autologin (it raced the greeter and started a second session)"
