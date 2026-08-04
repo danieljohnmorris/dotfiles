@@ -33,6 +33,8 @@ FILES=(
 
 SCRIPTS=".scripts"
 
+WALLPAPERS="Pictures/Wallpapers"
+
 case "${1:-pull}" in
     pull)
         echo "Deploying dotfiles to system..."
@@ -47,6 +49,8 @@ case "${1:-pull}" in
         mkdir -p "$HOME/.scripts"
         rsync -av "$DOTDIR/$SCRIPTS/" "$HOME/.scripts/"
         chmod +x "$HOME/.scripts/"*.sh
+        mkdir -p "$HOME/$WALLPAPERS"
+        rsync -av "$DOTDIR/$WALLPAPERS/" "$HOME/$WALLPAPERS/"
         echo "Done. Run 'hyprctl reload' and restart waybar to apply."
         ;;
     push)
@@ -61,6 +65,8 @@ case "${1:-pull}" in
         done
         mkdir -p "$DOTDIR/$SCRIPTS"
         rsync -av "$HOME/.scripts/" "$DOTDIR/$SCRIPTS/"
+        mkdir -p "$DOTDIR/$WALLPAPERS"
+        rsync -av "$HOME/$WALLPAPERS/" "$DOTDIR/$WALLPAPERS/"
         echo "Done. Commit and push to save."
         ;;
     *)
