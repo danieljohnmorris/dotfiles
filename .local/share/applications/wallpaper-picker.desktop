@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Wallpaper Picker
-Comment=Pick a wallpaper and retint the theme
-Exec=/home/dan/.scripts/wallpick-plasma.sh
-Icon=preferences-desktop-wallpaper
-Terminal=false
-Categories=Utility;
-StartupNotify=false
