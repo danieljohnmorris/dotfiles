@@ -36,6 +36,11 @@ groupadd -f nopasswdlogin
 [ -n "${SUDO_USER:-}" ] && gpasswd -a "$SUDO_USER" nopasswdlogin >/dev/null
 install -m644 "$DIR/etc/pam.d/sddm" /etc/pam.d/sddm
 
+echo "==> Passwordless Raspberry Pi Imager"
+install -d -m755 /etc/polkit-1/rules.d
+install -m644 "$DIR/etc/polkit-1/rules.d/49-rpi-imager.rules" \
+    /etc/polkit-1/rules.d/49-rpi-imager.rules
+
 echo "==> Preselect Hyprland at the login screen"
 install -m644 -o sddm -g sddm "$DIR/sddm-state.conf" /var/lib/sddm/state.conf
 

@@ -1,0 +1,11 @@
+// Passwordless Raspberry Pi Imager for dan.
+// The shipped policy is auth_admin_keep; this drops the prompt entirely.
+// Note: rpi-imager writes raw images to block devices, so nothing stands
+// between a misclick and an overwritten disk. Delete this file to restore
+// the password prompt.
+polkit.addRule(function(action, subject) {
+    if (action.id == "com.raspberrypi.rpi-imager.run" &&
+        subject.user == "dan" && subject.active && subject.local) {
+        return polkit.Result.YES;
+    }
+});

@@ -30,6 +30,7 @@ session.
 | `usr/share/wayland-sessions/hyprland-uwsm.desktop` | `Hidden=true` — removes the duplicate entry |
 | `etc/pam.d/sddm` | Passwordless login for members of the `nopasswdlogin` group |
 | `sddm-state.conf` | Goes to `/var/lib/sddm/state.conf`; preselects Hyprland |
+| `etc/polkit-1/rules.d/49-rpi-imager.rules` | Passwordless Raspberry Pi Imager (ships as `auth_admin_keep`) |
 
 `NoExtract = usr/share/wayland-sessions/hyprland-uwsm.desktop` is also added to
 `/etc/pacman.conf` so the duplicate doesn't come back on a Hyprland upgrade.
