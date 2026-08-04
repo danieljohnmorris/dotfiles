@@ -44,6 +44,18 @@ install -m644 "$DIR/etc/polkit-1/rules.d/49-rpi-imager.rules" \
 echo "==> Preselect Hyprland at the login screen"
 install -m644 -o sddm -g sddm "$DIR/sddm-state.conf" /var/lib/sddm/state.conf
 
+echo "==> SDDM: don't remember last session (show picker each boot)"
+install -m644 "$DIR/session.conf" /etc/sddm.conf.d/session.conf
+
+echo "==> SDDM: cyberpunk astronaut theme (requires: yay -S sddm-astronaut-theme)"
+if [ -d /usr/share/sddm/themes/sddm-astronaut-theme ]; then
+    install -m644 "$DIR/theme.conf" /etc/sddm.conf.d/theme.conf
+    sed -i "s|^ConfigFile=.*|ConfigFile=Themes/cyberpunk.conf|" \
+        /usr/share/sddm/themes/sddm-astronaut-theme/metadata.desktop
+else
+    echo "   (skipped — install sddm-astronaut-theme from AUR first)"
+fi
+
 cat <<'EOF'
 
 Done. Reboot to get a login screen with two options and no password:

@@ -19,6 +19,9 @@ CONFIGS=(
     ".config/fastfetch"
     ".config/elephant"
     ".config/walker"
+    ".config/DankMaterialShell"
+    ".local/share/color-schemes"
+    ".local/share/konsole"
 )
 
 # Single files, not directories

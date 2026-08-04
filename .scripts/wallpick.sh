@@ -21,7 +21,7 @@ awww img "$WALLPAPER" \
     --transition-fps 60
 
 # Generate colors with matugen
-matugen image "$WALLPAPER"
+matugen --prefer saturation image "$WALLPAPER"
 
 # Reload configs
 hyprctl reload

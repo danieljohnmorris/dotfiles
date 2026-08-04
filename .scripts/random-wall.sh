@@ -11,7 +11,7 @@ awww img "$WALLPAPER" \
     --transition-duration 1 \
     --transition-fps 60
 
-matugen image "$WALLPAPER"
+matugen --prefer saturation image "$WALLPAPER"
 
 hyprctl reload
 pkill -SIGUSR2 waybar
