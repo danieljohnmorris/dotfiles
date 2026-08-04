@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Install wallpaper picker panel button
+Exec=/home/dan/.scripts/plasma-add-wallpaper-button.sh
+OnlyShowIn=KDE;
+X-KDE-autostart-phase=2
+Terminal=false
+NoDisplay=true
