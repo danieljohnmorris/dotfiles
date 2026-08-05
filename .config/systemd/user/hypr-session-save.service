@@ -1,0 +1,7 @@
+[Unit]
+Description=Snapshot Hyprland session
+ConditionEnvironment=HYPRLAND_INSTANCE_SIGNATURE
+
+[Service]
+Type=oneshot
+ExecStart=%h/.scripts/hypr-session-save.sh

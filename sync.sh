@@ -24,6 +24,8 @@ CONFIGS=(
     ".local/share/color-schemes"
     ".local/share/konsole"
     ".local/share/applications"
+    ".local/bin"
+    ".config/systemd/user"
 )
 
 # Single files, not directories
@@ -59,7 +61,7 @@ case "${1:-pull}" in
         echo "Backing up system configs to repo..."
         for cfg in "${CONFIGS[@]}"; do
             mkdir -p "$DOTDIR/$cfg"
-            rsync -av "$HOME/$cfg/" "$DOTDIR/$cfg/"
+            rsync -av --delete "$HOME/$cfg/" "$DOTDIR/$cfg/"
         done
         for f in "${FILES[@]}"; do
             mkdir -p "$(dirname "$DOTDIR/$f")"

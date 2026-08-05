@@ -18,3 +18,6 @@
 
 # editor/tool backups
 *.bak.*
+
+# Compiled binaries that land in ~/.local/bin — not dotfiles.
+.local/bin/ilo

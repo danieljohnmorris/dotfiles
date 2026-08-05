@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# Applies the pre-picked wallpaper, then rolls the next one and stages it as the
+# SDDM picker background — so the login screen always previews the wallpaper you
+# are about to land on.
+set -uo pipefail
+
+# Only rotate once per real boot. Hyprland's exec-once fires on every session
+# start (config reload, crash-restart), which would otherwise churn through
+# staged wallpapers between logins and make SDDM show something you never saw.
+boot_id=$(cat /proc/sys/kernel/random/boot_id)
+last_boot_file=/home/dan/.local/state/rotate-wallpaper.boot_id
+mkdir -p "$(dirname "$last_boot_file")"
+if [ "$(cat "$last_boot_file" 2>/dev/null)" = "$boot_id" ]; then
+  echo "rotate-wallpaper: already ran this boot, skipping"
+  exit 0
+fi
+printf '%s' "$boot_id" > "$last_boot_file"
+
+dir=/home/dan/Pictures/Wallpapers
+fav=/home/dan/Pictures/Wallpapers/wp10450426-akira-anime-wallpapers.jpg
+state=/home/dan/.local/state/next-wallpaper
+mkdir -p "$(dirname "$state")"
+
+pick_next() {
+  # The favourite wins ~1 boot in 3; otherwise anything in the folder.
+  if [ $((RANDOM % 3)) -eq 0 ] && [ -f "$fav" ]; then
+    printf '%s' "$fav"
+  else
+    find "$dir" -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \) \
+      | shuf -n1
+  fi
+}
+
+# 1. Apply whatever was staged last boot (falling back to the favourite).
+wp=$(cat "$state" 2>/dev/null)
+[ -n "${wp:-}" ] && [ -f "$wp" ] || wp="$fav"
+/home/dan/.local/bin/set-wallpaper "$wp" >/dev/null 2>&1
+
+# 2. Roll the next one and stage it for the picker.
+next=$(pick_next)
+[ -n "$next" ] && [ -f "$next" ] || next="$fav"
+printf '%s' "$next" > "$state"
+/home/dan/.local/bin/sync-sddm-background "$next"
+
+echo "applied: $wp"
+echo "staged for next boot: $next"

@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# set-wallpaper <image> — sets the wallpaper and regenerates all matugen themes,
+# in either Hyprland or Plasma.
+set -uo pipefail
+
+wp="${1:-}"
+[ -f "$wp" ] || { echo "usage: set-wallpaper <image>" >&2; exit 1; }
+wp=$(realpath "$wp")
+
+matugen --prefer saturation image "$wp" || exit 1
+
+case "${XDG_CURRENT_DESKTOP:-}" in
+  *KDE*)
+    plasma-apply-wallpaperimage "$wp" >/dev/null 2>&1
+    # Plasma caches schemes by name; bounce to force a reload.
+    plasma-apply-colorscheme BreezeDark    >/dev/null 2>&1
+    plasma-apply-colorscheme MatugenDynamic >/dev/null 2>&1
+    ;;
+  *)
+    if command -v awww >/dev/null; then
+      awww img "$wp" --transition-type fade
+    elif command -v swww >/dev/null; then
+      swww img "$wp" --transition-type fade
+    elif command -v hyprpaper >/dev/null; then
+      hyprctl hyprpaper reload ,"$wp" >/dev/null 2>&1
+    fi
+    ;;
+esac
+
+# Keep the SDDM greeter and the "staged for next boot" state in sync with
+# whatever we just applied, so rotate/random/wallpick can't diverge from SDDM.
+state=/home/dan/.local/state/next-wallpaper
+mkdir -p "$(dirname "$state")"
+printf '%s' "$wp" > "$state"
+/home/dan/.local/bin/sync-sddm-background "$wp" >/dev/null 2>&1 || true
+
+echo "wallpaper + theme applied: $wp"

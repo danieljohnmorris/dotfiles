@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Regenerate matugen themes from whatever wallpaper Plasma is currently showing.
+# Triggered by plasma-wallpaper-watch.path when Plasma writes its applet config.
+set -uo pipefail
+
+cfg=/home/dan/.config/plasma-org.kde.plasma.desktop-appletsrc
+stamp=/home/dan/.local/state/plasma-wallpaper-last
+
+wp=$(grep -m1 '^Image=' "$cfg" 2>/dev/null | sed 's|^Image=||; s|^file://||; s|/$||')
+[ -n "${wp:-}" ] && [ -f "$wp" ] || exit 0
+
+# Plasma rewrites this config for many unrelated reasons; only act on real changes.
+[ -f "$stamp" ] && [ "$(cat "$stamp")" = "$wp" ] && exit 0
+mkdir -p "$(dirname "$stamp")"
+printf '%s' "$wp" > "$stamp"
+
+matugen --prefer saturation image "$wp" || exit 1
+plasma-apply-colorscheme BreezeDark     >/dev/null 2>&1
+plasma-apply-colorscheme MatugenDynamic >/dev/null 2>&1

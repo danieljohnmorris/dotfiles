@@ -1,0 +1,6 @@
+[Unit]
+Description=Regenerate matugen theme from Plasma wallpaper
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/plasma-watch-wallpaper

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Copy the current wallpaper to the SDDM picker background.
+# The target file is owned by dan, so no sudo is needed.
+set -uo pipefail
+
+dest=/usr/share/sddm/themes/twobutton/background.jpg
+[ -w "$dest" ] || exit 0
+
+wp="${1:-}"
+if [ -z "$wp" ]; then
+  # Plasma first, then the DankMaterialShell state used under Hyprland.
+  cfg=/home/dan/.config/plasma-org.kde.plasma.desktop-appletsrc
+  wp=$(grep -m1 '^Image=' "$cfg" 2>/dev/null | sed 's|^Image=||; s|^file://||; s|/$||')
+  [ -n "$wp" ] && [ -f "$wp" ] || \
+    wp=$(grep -oE '"[^"]*\.(jpg|jpeg|png)"' /home/dan/.local/state/DankMaterialShell/session.json 2>/dev/null | head -1 | tr -d '"')
+fi
+[ -n "${wp:-}" ] && [ -f "$wp" ] || exit 0
+
+# Downscale so the greeter isn't decoding a 7MB image at every login.
+if command -v magick >/dev/null; then
+  magick "$wp" -resize 1920x1080^ -gravity center -extent 1920x1080 -quality 85 "$dest"
+else
+  cp "$wp" "$dest"
+fi

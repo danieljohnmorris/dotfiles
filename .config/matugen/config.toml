@@ -24,7 +24,10 @@ output_path = "~/.config/swaync/style.css"
 [templates.kde]
 input_path = "~/.config/matugen/templates/kde-colorscheme.colors"
 output_path = "~/.local/share/color-schemes/MatugenDynamic.colors"
-post_hook = "command -v plasma-apply-colorscheme >/dev/null && pgrep -x plasmashell >/dev/null && plasma-apply-colorscheme MatugenDynamic || true"
+# matugen's `.rgb` format emits CSS `rgb(r, g, b)`, but KConfig only parses bare
+# `r,g,b` — every colour silently fails to convert and Plasma falls back to
+# defaults. Normalise the file before handing it to plasma-apply-colorscheme.
+post_hook = "sed -i -E 's/rgb\\(([0-9]+), *([0-9]+), *([0-9]+)\\)/\\1,\\2,\\3/g' ~/.local/share/color-schemes/MatugenDynamic.colors; command -v plasma-apply-colorscheme >/dev/null && pgrep -x plasmashell >/dev/null && plasma-apply-colorscheme MatugenDynamic || true"
 
 [templates.kvantum_svg]
 input_path = "~/.config/matugen/templates/kvantum-theme.svg"

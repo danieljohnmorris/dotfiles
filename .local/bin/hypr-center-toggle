@@ -1,0 +1,31 @@
+#!/bin/bash
+# Toggle window between centered floating (50% width, full height) and tiled.
+# Bound to Super+Shift+C in ~/.config/hypr/bindings.conf
+#
+# When activated, the window floats centered on screen with 10px padding
+# from top/bottom bars. Respects waybar reserved space. Press again to
+# return to tiled mode.
+
+floating=$(hyprctl activewindow -j | jq -r '.floating')
+
+if [ "$floating" = "true" ]; then
+    hyprctl dispatch togglefloating
+else
+    # Get monitor info
+    monitor=$(hyprctl monitors -j | jq -r '.[0]')
+    monitor_width=$(echo "$monitor" | jq -r '.width')
+    monitor_height=$(echo "$monitor" | jq -r '.height')
+    reserved_top=$(echo "$monitor" | jq -r '.reserved[1]')
+    reserved_bottom=$(echo "$monitor" | jq -r '.reserved[3]')
+
+    # Calculate window dimensions and position (with padding)
+    padding=10
+    available_height=$((monitor_height - reserved_top - reserved_bottom - padding * 2))
+    window_width=$((monitor_width / 2))
+    window_x=$(((monitor_width - window_width) / 2))
+    window_y=$((reserved_top + padding))
+
+    hyprctl dispatch togglefloating
+    hyprctl dispatch moveactive exact "$window_x" "$window_y"
+    hyprctl dispatch resizeactive exact "$window_width" "$available_height"
+fi

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Applies the matugen-generated colour scheme + current DMS wallpaper inside Plasma.
+# Plasma caches a scheme by name, so force a reload by bouncing off BreezeDark.
+set -uo pipefail
+
+state=/home/dan/.local/state/DankMaterialShell/session.json
+scheme=/home/dan/.local/share/color-schemes/MatugenDynamic.colors
+
+if [ -f "$scheme" ]; then
+  plasma-apply-colorscheme BreezeDark >/dev/null 2>&1
+  plasma-apply-colorscheme MatugenDynamic >/dev/null 2>&1
+fi
+
+wp=$(grep -oE '"[^"]*\.(jpg|jpeg|png)"' "$state" 2>/dev/null | head -1 | tr -d '"')
+if [ -n "${wp:-}" ] && [ -f "$wp" ]; then
+  plasma-apply-wallpaperimage "$wp" >/dev/null 2>&1
+fi

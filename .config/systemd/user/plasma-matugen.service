@@ -1,0 +1,7 @@
+[Unit]
+Description=Apply matugen colour scheme in Plasma
+ConditionEnvironment=XDG_CURRENT_DESKTOP=KDE
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/plasma-apply-matugen

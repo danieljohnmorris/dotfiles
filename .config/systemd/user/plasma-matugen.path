@@ -1,0 +1,9 @@
+[Unit]
+Description=Watch matugen colour scheme for changes
+ConditionEnvironment=XDG_CURRENT_DESKTOP=KDE
+
+[Path]
+PathChanged=%h/.local/share/color-schemes/MatugenDynamic.colors
+
+[Install]
+WantedBy=default.target

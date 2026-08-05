@@ -1,0 +1,10 @@
+[Unit]
+Description=Periodically snapshot Hyprland session
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=30s
+Unit=hypr-session-save.service
+
+[Install]
+WantedBy=timers.target

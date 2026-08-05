@@ -1,0 +1,13 @@
+[Unit]
+Description=Watch Plasma wallpaper for changes
+# Binding to plasma-workspace.target already scopes this to a Plasma session.
+# ConditionEnvironment=XDG_CURRENT_DESKTOP=KDE was unreliable: the systemd user
+# manager evaluates conditions before Plasma imports that variable, so the unit
+# was silently skipped on every boot.
+PartOf=graphical-session.target
+
+[Path]
+PathChanged=%h/.config/plasma-org.kde.plasma.desktop-appletsrc
+
+[Install]
+WantedBy=plasma-workspace.target
