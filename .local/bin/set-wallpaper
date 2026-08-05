@@ -18,6 +18,12 @@ case "${XDG_CURRENT_DESKTOP:-}" in
     ;;
   *)
     if command -v awww >/dev/null; then
+      # Wait for awww-daemon — exec-once fires it in parallel with
+      # rotate-wallpaper at boot, so the socket may not exist yet.
+      for _ in $(seq 1 40); do
+        awww query >/dev/null 2>&1 && break
+        sleep 0.25
+      done
       awww img "$wp" --transition-type fade
     elif command -v swww >/dev/null; then
       swww img "$wp" --transition-type fade
