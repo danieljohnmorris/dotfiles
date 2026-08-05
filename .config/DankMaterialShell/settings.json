@@ -377,7 +377,7 @@
   "powerMenuDefaultAction": "logout",
   "powerMenuGridLayout": false,
   "customPowerActionLock": "",
-  "customPowerActionLogout": "",
+  "customPowerActionLogout": "/home/dan/.scripts/logout-to-picker.sh",
   "customPowerActionSuspend": "",
   "customPowerActionHibernate": "",
   "customPowerActionReboot": "",
