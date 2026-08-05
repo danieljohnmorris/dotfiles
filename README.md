@@ -72,6 +72,10 @@ description (`bindd`), so `hyprctl binds` prints them readably.
 - `.config/hypr/monitors.conf` is machine-specific. Edit it for your display —
   run `hyprctl monitors` to see what you've got.
 - Wallpapers go in `~/Pictures/Wallpapers`.
+- The same wallpaper-driven theming works under KDE Plasma, via a different set
+  of moving parts (one autostart wallpaper writer plus a systemd path unit that
+  re-derives colours). How it fits together, and the traps in it, are in
+  [`docs/plasma-theming.md`](docs/plasma-theming.md).
 
 ## Credit
 
