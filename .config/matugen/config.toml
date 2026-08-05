@@ -25,3 +25,11 @@ output_path = "~/.config/swaync/style.css"
 input_path = "~/.config/matugen/templates/kde-colorscheme.colors"
 output_path = "~/.local/share/color-schemes/MatugenDynamic.colors"
 post_hook = "command -v plasma-apply-colorscheme >/dev/null && pgrep -x plasmashell >/dev/null && plasma-apply-colorscheme MatugenDynamic || true"
+
+[templates.kvantum_svg]
+input_path = "~/.config/matugen/templates/kvantum-theme.svg"
+output_path = "~/.config/Kvantum/KvMatugen/KvMatugen.svg"
+
+[templates.kvantum_config]
+input_path = "~/.config/matugen/templates/kvantum-theme.kvconfig"
+output_path = "~/.config/Kvantum/KvMatugen/KvMatugen.kvconfig"

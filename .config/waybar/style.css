@@ -89,6 +89,13 @@ window#waybar {
   margin-right: 16px;
 }
 
+#custom-logout {
+  padding: 0 10px;
+  margin-right: 6px;
+  color: @primary;
+  font-size: 16px;
+}
+
 #bluetooth {
   margin-right: 17px;
 }

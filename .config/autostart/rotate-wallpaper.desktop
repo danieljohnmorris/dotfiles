@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Rotate wallpaper
+Exec=/home/dan/.local/bin/rotate-wallpaper
+X-KDE-autostart-phase=2

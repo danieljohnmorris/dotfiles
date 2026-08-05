@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Apply matugen theme
+Exec=/home/dan/.local/bin/plasma-apply-matugen
+OnlyShowIn=KDE;
+X-KDE-autostart-phase=2
